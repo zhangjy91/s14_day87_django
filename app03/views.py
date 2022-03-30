@@ -67,3 +67,21 @@ from app03.ser import FruitSerializers
 class Fruit4ViewSet(ModelViewSet):
     queryset = Fruit.objects
     serializer_class = FruitSerializers
+
+from app03.models import User,UserToken
+import uuid
+
+class LoginView(APIView):
+
+    def post(self,request):
+        username = request.data.get('username')
+        password = request.data.get('password')
+
+        user = User.objects.filter(username=username, password=password).first()
+
+        if user:
+            token = uuid.uuid4()
+            UserToken.objects.update_or_create(defaults={'token':token}, user=user)
+            return Response({'status':100, 'msg':'登录成功', 'token':token})
+        else:
+            return Response({'status':101, 'msg':'用户名或密码错误'})

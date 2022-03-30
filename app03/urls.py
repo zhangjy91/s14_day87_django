@@ -36,6 +36,8 @@ urlpatterns = [
 
     re_path('fruits3/(?P<pk>\d+)',views.Fruit3View.as_view(actions={'get':'retrieve', 'put':'update', 'delete':'destroy'})),
     path('fruits3/', views.Fruit3View.as_view(actions={'get':'list', 'post':'create'})),
+
+    path('login/', views.LoginView.as_view()),
 ]
 
 urlpatterns += router.urls
