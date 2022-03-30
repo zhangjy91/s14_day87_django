@@ -77,3 +77,7 @@ class BooksView2(APIView):
         books_ser = BookModelSerializer(books, many=True)
         response_msg['data'] = books_ser.data
         return Response(response_msg)
+
+
+class test1():
+    pass
