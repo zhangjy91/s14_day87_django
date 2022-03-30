@@ -55,7 +55,11 @@ class Fruit2DetailView(RetrieveUpdateDestroyAPIView):
 
 from rest_framework.viewsets import ModelViewSet
 
+from app03.app_auth import MyAuthentication
+
+
 class Fruit3View(ModelViewSet):
+    authentication_classes = [MyAuthentication]
     queryset = Fruit.objects
     serializer_class = FruitSerializers
 
@@ -72,7 +76,7 @@ from app03.models import User,UserToken
 import uuid
 
 class LoginView(APIView):
-
+    # authentication_classes = [MyAuthentication]
     def post(self,request):
         username = request.data.get('username')
         password = request.data.get('password')
