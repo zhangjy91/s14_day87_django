@@ -7,11 +7,15 @@ from rest_framework.response import Response
 
 from app03.models import Fruit
 from app03.ser import FruitSerializers
+from app03.app_auth import MyAuthentication
+
+from rest_framework.authentication import BaseAuthentication
 
 class FruitView(APIView):
-
+    authentication_classes = [MyAuthentication]
     def get(self,request):
         fruit = Fruit.objects.all()
+        print('33333333' + request.user.username)
         fruit_ser = FruitSerializers(fruit, many=True)
         return Response(fruit_ser.data)
 
@@ -82,7 +86,7 @@ class LoginView(APIView):
         password = request.data.get('password')
 
         user = User.objects.filter(username=username, password=password).first()
-
+        print('22222' + user.username)
         if user:
             token = uuid.uuid4()
             UserToken.objects.update_or_create(defaults={'token':token}, user=user)
