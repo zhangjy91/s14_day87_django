@@ -13,10 +13,11 @@ from app03.app_auth import MyPermission, MyAuthentication
 
 class FruitView(APIView):
     authentication_classes = [MyAuthentication]
-    permission_classes = [MyPermission]
+    # permission_classes = [MyPermission]
     def get(self,request):
         fruit = Fruit.objects.all()
         print('33333333' + request.user.username)
+        1/0
         fruit_ser = FruitSerializers(fruit, many=True)
         return Response(fruit_ser.data)
 
