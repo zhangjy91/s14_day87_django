@@ -40,6 +40,8 @@ urlpatterns = [
     path('login/', views.LoginView.as_view()),
 
     path('fruits5/', views.Fruit5View.as_view()),
+
+    path('fruits6/', views.Fruit6View.as_view()),
 ]
 
 urlpatterns += router.urls

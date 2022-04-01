@@ -12,7 +12,7 @@ from app03.app_auth import MyAuthentication
 from app03.app_auth import MyPermission, MyAuthentication
 
 class FruitView(APIView):
-    authentication_classes = [MyAuthentication]
+    # authentication_classes = [MyAuthentication]
     # permission_classes = [MyPermission]
     def get(self,request):
         fruit = Fruit.objects.all()
@@ -117,3 +117,11 @@ class Fruit5View(ListAPIView):
 
     filter_backends = [OrderingFilter]
     ordering_fields = ('id','price',)
+
+
+from app03.app_auth import APIResponse
+
+class Fruit6View(APIView):
+    def get(self,request):
+        return APIResponse(data={'name':'zhangqi','age':22,},token='2342sdff',ss='ssssssss')
+        # return APIResponse()

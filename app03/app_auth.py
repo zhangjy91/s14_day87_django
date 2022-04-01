@@ -35,6 +35,8 @@ def my_exception_handler(exc, context):
     response = exception_handler(exc, context)
 
     if not response:
+        if isinstance(exc, ZeroDivisionError):
+            return Response(data={'status':777, 'msg':'不能除以0 ' + str(exc)},status=status.HTTP_400_BAD_REQUEST)
         return Response(data={'status':999, 'msg':str(exc)},status=status.HTTP_400_BAD_REQUEST)
     else:
         # return response
@@ -42,3 +44,12 @@ def my_exception_handler(exc, context):
 
     print(exc)
     print(context)
+
+
+class APIResponse(Response):
+    def __init__(self,code=100, msg='成功',data=None,status=None,headers=None,**kwargs):
+        dic = {'code':code, 'msg':msg}
+        if data:
+            dic = {'code':code, 'msg':msg, 'data':data}
+        dic.update(kwargs)
+        super().__init__(data=dic, status=status,headers=headers)
