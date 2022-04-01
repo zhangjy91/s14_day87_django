@@ -38,6 +38,8 @@ urlpatterns = [
     path('fruits3/', views.Fruit3View.as_view(actions={'get':'list', 'post':'create'})),
 
     path('login/', views.LoginView.as_view()),
+
+    path('fruits5/', views.Fruit5View.as_view()),
 ]
 
 urlpatterns += router.urls

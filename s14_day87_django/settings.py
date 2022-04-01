@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'app01',
     'app02',
     'app03',
+    'django_filters',
 ]
 
 MIDDLEWARE = [
@@ -141,3 +142,19 @@ STATIC_URL = '/static/'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# REST_FRAMEWORK = {
+#     'DEFAULT_THROTTLE_CLASSES':('rest_framework.throttling.AnonRateThrottle',),
+#     'DEFAULT_THROTTLE_RATES':{'anon':'3/m',}
+# }
+
+REST_FRAMEWORK = {
+    #频率控制配置
+    # "DEFAULT_THROTTLE_CLASSES":['rest_framework.throttling.AnonRateThrottle'],   #全局配置，
+
+    "DEFAULT_THROTTLE_RATES":{
+        'anon':'3/m',         #速率配置每分钟不能超过5次访问，WD是scope定义的值，
+    },
+    'DEFAULT_FILTER_BACKENDS': (
+           'django_filters.rest_framework.DjangoFilterBackend',),
+}
